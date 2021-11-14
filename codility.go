@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	output := Solution(2, "1A 2F 1C")
+	output := Solution(4, "1A 2F 1C 4D 3K")
 	fmt.Println(output)
 }
 
@@ -48,7 +48,7 @@ func findMaxInRow(row []bool) int {
 		return 1
 	}
 	// 0 otherwise, all taken
-	return 0
+	return 2
 }
 
 func setupSeatingPlan(N int, S string) map[int][]bool {
