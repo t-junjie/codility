@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	output := Solution(4, "1A 2F 1C 4D 3K")
+	output := Solution(4, "3D")
 	fmt.Println(output)
 }
 
@@ -69,6 +69,9 @@ func setupSeatingPlan(N int, S string) map[int][]bool {
 	// fill in reserved seats
 	reserved := strings.Split(S, " ")
 	for _, v := range reserved {
+		if v == "" {
+			break
+		}
 		seat := string(v[len(v)-1])
 		row, _ := strconv.Atoi(v[:len(v)-1])
 		if index, ok := seatToIndex[seat]; ok {
