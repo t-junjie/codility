@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 	"strconv"
 	"strings"
 )
@@ -30,8 +29,6 @@ func Solution(N int, S string) int {
 	sum := 0
 	for _, row := range seats {
 		sum += findMaxInRow(row)
-		fmt.Printf("row: %v\n", row)
-		fmt.Println("sum:", sum)
 	}
 	return sum
 }
@@ -44,12 +41,10 @@ func findMaxInRow(row []bool) int {
 	takenFGHJ := row[seatToIndex["F"]] || row[seatToIndex["G"]] || row[seatToIndex["H"]] || row[seatToIndex["J"]]
 	fmt.Printf("BCDE taken: %v, FGHJ taken:%v\n", takenBCDE, takenFGHJ)
 	if takenBCDE && takenFGHJ {
-		// test if D & G are both taken - assume BCDE and FGHJ are taken if so
 		return 0
 	}
 	// 1 if DEFG not taken
 	if takenBCDE || takenFGHJ {
-		// assume either BCDE or FGHJ are taken
 		return 1
 	}
 	// 0 otherwise, all taken
@@ -82,33 +77,4 @@ func setupSeatingPlan(N int, S string) map[int][]bool {
 	}
 
 	return seats
-}
-
-func test(A []int) int {
-	// sort array and split into -ve/+ve array using mid as an indicator
-	sort.Ints(A)
-
-	// mid := 0
-	// for k, v := range A {
-	// 	if v > 0 {
-	// 		mid = k
-	// 		break
-	// 	}
-	// }
-
-	found := 0
-	i, j := 0, len(A)-1
-	for i < j {
-		if -1*A[i] == A[j] {
-			found = A[j]
-			break
-		}
-		if -1*A[i] < A[j] {
-			j--
-		} else {
-			i++
-		}
-	}
-
-	return found
 }
