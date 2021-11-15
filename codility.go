@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	output := Solution(4, "3D")
+	output := Solution(4, "3A")
 	fmt.Println(output)
 }
 
@@ -36,10 +36,10 @@ func Solution(N int, S string) int {
 // given a row, find max no of 4-member family that can be seated
 func findMaxInRow(row []bool) int {
 	// note only 3 possibilties per row
-	// 2 if BCDE,FGHJ are not taken
 	takenBCDE := row[seatToIndex["B"]] || row[seatToIndex["C"]] || row[seatToIndex["D"]] || row[seatToIndex["E"]]
 	takenFGHJ := row[seatToIndex["F"]] || row[seatToIndex["G"]] || row[seatToIndex["H"]] || row[seatToIndex["J"]]
-	fmt.Printf("BCDE taken: %v, FGHJ taken:%v\n", takenBCDE, takenFGHJ)
+
+	// 0 if all taken
 	if takenBCDE && takenFGHJ {
 		return 0
 	}
@@ -47,15 +47,16 @@ func findMaxInRow(row []bool) int {
 	if takenBCDE || takenFGHJ {
 		return 1
 	}
-	// 0 otherwise, all taken
+	// 2 if BCDE,FGHJ are not taken
 	return 2
 }
 
 func setupSeatingPlan(N int, S string) map[int][]bool {
 	// Create a seating plan with N rows and 10 seats (A-K)
 	seats := make(map[int][]bool)
-	r := []bool{}
+
 	// create a row of seats
+	r := []bool{}
 	for i := 0; i < 10; i++ {
 		r = append(r, false)
 	}
